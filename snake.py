@@ -1,3 +1,4 @@
+from xml.dom import ValidationErr
 import pygame
 import settings
 import time
@@ -26,7 +27,12 @@ clock = pygame.time.Clock()
 snake_block = settings.SNAKE_BLOCK
 snake_speed = settings.SNAKE_SPEED
 
-font_style = pygame.font.SysFont(None, 50)
+font_style = pygame.font.SysFont("bahnschrift", 25)
+score_font = pygame.font.SysFont("comicsanams", 25)
+
+def your_score(score):
+    value = score_font.render("YOUR SCORE: " + str(score), True, settings.YELLOW)
+    dis.blit(value, [0,0])
 
 def our_snake(snake_block, snake_list):
     for x in snake_list:
@@ -105,6 +111,7 @@ def game_loop():
                 game_close = True
         
         our_snake(snake_block, snake_list)
+        your_score(length_of_snake - 1)
 
         pygame.display.update()
 
